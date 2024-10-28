@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import logoColored from "./assets/icons/logo-colored.svg";
+import logoCopyright from "./assets/icons/logo-copyright.svg"
 import { getUuid, Link } from "../api/testTaskApi";
 import { useEffect, useState } from "react";
 import "./assets/styles/HomePage.css";
@@ -45,7 +46,13 @@ export default function HomePage() {
         </div>
       </div>
 
-      <footer>dfsdf</footer>
+      <footer  className="footer-box">
+        <span>2024 © Work Solutions</span>
+
+  
+        <img src={logoCopyright} alt="Логотип компании" width={66} height={48} className="footer-logo"/>
+
+      </footer >
     </main>
   );
 }

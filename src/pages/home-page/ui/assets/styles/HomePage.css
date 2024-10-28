@@ -4,6 +4,7 @@
   padding: 30px;
   height: 100%;
   width: 100%;
+  justify-content: space-between;
 }
 
 .content-wrapper {
@@ -41,8 +42,18 @@
 
 .comment-box {
   display: flex;
+  gap: 10px;
   flex-direction: column;
   font-weight: 400;
   font-size: 14px;
   line-height: 16.41px;
+
 }
+
+.footer-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
