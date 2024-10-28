@@ -1,15 +1,12 @@
-import logoColored from "./assets/icons/logo-colored.svg"
-import './App.css';
+import "./App.css";
+import { Route, Routes, useParams } from "react-router-dom";
+import HomePage from "./pages/home-page/ui/HomePage";
 
 function App() {
   return (
-<main>
-  <header>
-    <img src={logoColored} alt="Логотип компании" width={132} height={96}/>
-  </header>
-
-  <div></div>
-</main>
+    <Routes>
+      <Route path="tasks/:uuid" element={<HomePage />} />
+    </Routes>
   );
 }
 
