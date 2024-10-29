@@ -1,0 +1,7 @@
+.main-box {
+display: grid;
+padding: 30px;
+align-content: space-between;
+height: 100%;
+}
+
