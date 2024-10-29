@@ -1,3 +1,5 @@
+const HOST = "http://localhost:1337";
+
 type Task = {
   id: number;
   documentId: string;
@@ -12,6 +14,24 @@ export type Link = {
   task: Task;
 };
 
+export type Settings = {
+  title?: string;
+  comment?: string;
+  videoInstructions?: string;
+};
+
+type DataSettings = {
+  data: Settings;
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
 type DataUUID = {
   data: Link[];
   meta: {
@@ -25,9 +45,9 @@ type DataUUID = {
 };
 
 export async function getUuid(uuid: string) {
-  const resp: DataUUID = await fetch(
-    "http://localhost:1337/api/task-links?populate=*"
-  ).then((res) => res.json());
+  const resp: DataUUID = await fetch(`${HOST}/api/task-links?populate=*`).then(
+    (res) => res.json()
+  );
 
   const linkId = resp.data.findIndex((val: Link) => val.uuid === uuid);
   if (linkId === -1) {
@@ -35,4 +55,10 @@ export async function getUuid(uuid: string) {
   } else {
     return resp.data[linkId];
   }
+}
+
+export async function getTaskSettings(): Promise<DataSettings> {
+  const resp = await fetch(`${HOST}/api/setting-test-task`);
+
+  return resp.json();
 }
