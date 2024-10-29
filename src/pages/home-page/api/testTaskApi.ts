@@ -12,6 +12,7 @@ export type Link = {
   uuid: string;
   validity: boolean;
   task: Task;
+  documentId: string;
 };
 
 export type Settings = {
@@ -30,7 +31,7 @@ type DataSettings = {
       total: number;
     };
   };
-}
+};
 
 type DataUUID = {
   data: Link[];
@@ -61,4 +62,23 @@ export async function getTaskSettings(): Promise<DataSettings> {
   const resp = await fetch(`${HOST}/api/setting-test-task`);
 
   return resp.json();
+}
+
+export async function updateValidity(link: Link) {
+  console.log(link.documentId)
+  const resp = await fetch(`${HOST}/api/task-links/${link.documentId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data: {
+        uuid: link.uuid,
+        validity: false,
+      }
+    })
+
+  })
+
+  return resp.json()
 }

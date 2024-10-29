@@ -1,5 +1,11 @@
 import { useParams } from "react-router-dom";
-import { getTaskSettings, getUuid, Link, Settings } from "../api/testTaskApi";
+import {
+  getTaskSettings,
+  getUuid,
+  Link,
+  Settings,
+  updateValidity,
+} from "../api/testTaskApi";
 import { useEffect, useState } from "react";
 import "./assets/styles/HomePage.css";
 import "./assets/styles/TestTask.css";
@@ -7,21 +13,27 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 export default function HomePage() {
-  const [link, setLink] = useState<Link>();
+  const [link, setLink] = useState<Link | null>(null);
   const [settings, setSettings] = useState<Settings | null>(null);
 
   const { uuid } = useParams();
 
   function getUuidFromFetch() {
-    getUuid(uuid!).then((res) => {
-      setLink(res);
-    });
+   getUuid(uuid!).then((res) => {
+    console.log(res)
+    const temp = res
+
+    updateValidity(res!)
+    setLink(temp!)
+    })
+
+ 
   }
 
   function getTaskSettingsFromFetch() {
     getTaskSettings().then((res) => {
       setSettings(res.data);
-      console.log(res);
+
     });
   }
 
